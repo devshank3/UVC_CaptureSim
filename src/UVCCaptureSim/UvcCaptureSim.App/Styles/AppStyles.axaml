@@ -1,0 +1,93 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style Selector="TextBlock.label">
+        <Setter Property="Foreground" Value="{DynamicResource BrandTextDimBrush}" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="Margin" Value="0,8,0,3" />
+    </Style>
+
+    <Style Selector="TextBlock.h">
+        <Setter Property="Foreground" Value="{DynamicResource BrandTextBrush}" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="Margin" Value="0,4,0,4" />
+    </Style>
+
+    <Style Selector="Button">
+        <Setter Property="Background" Value="{DynamicResource BrandSurfaceAltBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource BrandTextBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource BrandBorderBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="8" />
+        <Setter Property="Padding" Value="14,8" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+    </Style>
+
+    <Style Selector="Button:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource BrandBorderBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource BrandAccentDimBrush}" />
+    </Style>
+
+    <Style Selector="Button:disabled /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource ButtonBackgroundDisabled}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ButtonBorderBrushDisabled}" />
+        <Setter Property="Foreground" Value="{DynamicResource ButtonForegroundDisabled}" />
+    </Style>
+
+    <Style Selector="Button.accent /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource AccentButtonBackground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource AccentButtonBorderBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource AccentButtonForeground}" />
+    </Style>
+
+    <Style Selector="Button.accent:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource AccentButtonBackgroundPointerOver}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource AccentButtonBorderBrushPointerOver}" />
+        <Setter Property="Foreground" Value="{DynamicResource AccentButtonForegroundPointerOver}" />
+    </Style>
+
+    <Style Selector="Button.rec:not(:disabled)">
+        <Setter Property="Foreground" Value="{DynamicResource BrandRecBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource BrandRecBrush}" />
+    </Style>
+
+    <Style Selector="Button.rec:not(:disabled) /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Foreground" Value="{DynamicResource BrandRecBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource BrandRecBrush}" />
+        <Setter Property="Background" Value="{DynamicResource BrandSurfaceAltBrush}" />
+    </Style>
+
+    <Style Selector="TextBox">
+        <Setter Property="Background" Value="{DynamicResource BrandSurfaceAltBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource BrandBorderBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource BrandTextBrush}" />
+        <Setter Property="CornerRadius" Value="6" />
+        <Setter Property="MinHeight" Value="32" />
+        <Setter Property="Padding" Value="8,4" />
+    </Style>
+
+    <Style Selector="ComboBox">
+        <Setter Property="Background" Value="{DynamicResource BrandSurfaceAltBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource BrandBorderBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource BrandTextBrush}" />
+        <Setter Property="CornerRadius" Value="6" />
+        <Setter Property="MinHeight" Value="32" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+    </Style>
+
+    <Style Selector="ListBox">
+        <Setter Property="Background" Value="{DynamicResource BrandSurfaceAltBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource BrandBorderBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="6" />
+        <Setter Property="Foreground" Value="{DynamicResource BrandTextBrush}" />
+        <Setter Property="Padding" Value="0" />
+    </Style>
+
+    <Style Selector="CheckBox">
+        <Setter Property="Foreground" Value="{DynamicResource BrandTextBrush}" />
+    </Style>
+</Styles>

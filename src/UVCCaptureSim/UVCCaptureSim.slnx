@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="UvcCaptureSim.App/UvcCaptureSim.App.csproj" />
+  <Project Path="UvcCaptureSim.Core/UvcCaptureSim.Core.csproj" />
+</Solution>

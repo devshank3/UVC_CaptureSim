@@ -1,0 +1,135 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:UvcCaptureSim.App.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="1180" d:DesignHeight="760"
+        x:Class="UvcCaptureSim.App.Views.MainWindow"
+        x:DataType="vm:MainViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="UVC Capture-Card Simulator"
+        Width="1180" Height="760" MinWidth="980" MinHeight="640"
+        Background="{DynamicResource BrandBackgroundBrush}"
+        Foreground="{DynamicResource BrandTextBrush}"
+        WindowStartupLocation="CenterScreen">
+
+    <Design.DataContext>
+        <vm:MainViewModel />
+    </Design.DataContext>
+
+    <Grid Margin="16" ColumnDefinitions="*,376">
+
+        <Border Grid.Column="0" Margin="0,0,16,0"
+                Background="{DynamicResource BrandSurfaceBrush}"
+                BorderBrush="{DynamicResource BrandBorderBrush}"
+                BorderThickness="1" CornerRadius="12">
+            <Grid RowDefinitions="Auto,*,Auto" Margin="14">
+                <Grid ColumnDefinitions="*,Auto" Margin="0,0,0,10">
+                    <TextBlock Text="Virtual Capture Card" FontSize="18" FontWeight="Bold"
+                               Foreground="{DynamicResource BrandTextBrush}" VerticalAlignment="Center" />
+                    <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                        <TextBlock Text="● LIVE" FontWeight="Bold"
+                                   Foreground="{DynamicResource BrandAccentBrush}"
+                                   IsVisible="{Binding IsRunning}" VerticalAlignment="Center" />
+                        <TextBlock Text="● idle" Foreground="{DynamicResource BrandTextDimBrush}"
+                                   IsVisible="{Binding IsIdle}" VerticalAlignment="Center" />
+                    </StackPanel>
+                </Grid>
+
+                <Border Grid.Row="1" Background="{DynamicResource BrandPreviewBrush}" CornerRadius="8" ClipToBounds="True">
+                    <Image x:Name="LiveImage" Stretch="Uniform" AutomationProperties.Name="Live preview" />
+                </Border>
+
+                <StackPanel Grid.Row="2" Margin="0,10,0,0" Spacing="2">
+                    <TextBlock Text="{Binding StatusText}" TextWrapping="Wrap"
+                               Foreground="{DynamicResource BrandTextBrush}" />
+                    <TextBlock Text="{Binding ConnectionText}" Classes="label" Margin="0,2,0,0"
+                               IsVisible="{Binding IsRunning}" />
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <Border Grid.Column="1"
+                Background="{DynamicResource BrandSurfaceBrush}"
+                BorderBrush="{DynamicResource BrandBorderBrush}"
+                BorderThickness="1" CornerRadius="12">
+            <Grid Margin="16" RowDefinitions="Auto,*,Auto">
+
+                <StackPanel Grid.Row="0" Spacing="2">
+                    <TextBlock Text="Output" Classes="h" />
+
+                    <TextBlock Text="Virtual camera backend" Classes="label" />
+                    <ComboBox ItemsSource="{Binding Backends}" SelectedItem="{Binding Backend}"
+                              AutomationProperties.Name="Virtual camera backend" />
+
+                    <Grid ColumnDefinitions="*,10,*,10,*" Margin="0,4,0,0">
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="Width" Classes="label" />
+                            <TextBox Text="{Binding Width}" AutomationProperties.Name="Width" />
+                        </StackPanel>
+                        <StackPanel Grid.Column="2">
+                            <TextBlock Text="Height" Classes="label" />
+                            <TextBox Text="{Binding Height}" AutomationProperties.Name="Height" />
+                        </StackPanel>
+                        <StackPanel Grid.Column="4">
+                            <TextBlock Text="FPS" Classes="label" />
+                            <TextBox Text="{Binding FramesPerSecond}" AutomationProperties.Name="Frames per second" />
+                        </StackPanel>
+                    </Grid>
+
+                    <TextBlock Text="Scaling" Classes="label" />
+                    <ComboBox ItemsSource="{Binding ScalingModes}" SelectedItem="{Binding Scaling}"
+                              AutomationProperties.Name="Scaling" />
+
+                    <CheckBox Content="Burn in clock / resolution overlay" IsChecked="{Binding ShowOverlay}"
+                              Margin="0,8,0,0" AutomationProperties.Name="Show overlay" />
+
+                    <TextBlock Text="Playlist" Classes="h" Margin="0,12,0,4" />
+                    <Grid ColumnDefinitions="*,*,*">
+                        <Button Grid.Column="0" Content="+ Image" Command="{Binding AddImagesCommand}"
+                                Margin="0,0,4,0" AutomationProperties.Name="Add images" />
+                        <Button Grid.Column="1" Content="+ Video" Command="{Binding AddVideosCommand}"
+                                Margin="2,0" AutomationProperties.Name="Add videos" />
+                        <Button Grid.Column="2" Content="+ Pattern" Command="{Binding AddTestPatternCommand}"
+                                Margin="4,0,0,0" AutomationProperties.Name="Add test pattern" />
+                    </Grid>
+                </StackPanel>
+
+                <ListBox Grid.Row="1" Margin="0,8"
+                         ItemsSource="{Binding Playlist}" SelectedItem="{Binding SelectedItem}"
+                         AutomationProperties.Name="Playlist" />
+
+                <StackPanel Grid.Row="2" Spacing="8">
+                    <Grid ColumnDefinitions="*,*,*">
+                        <Button Grid.Column="0" Content="Remove" Command="{Binding RemoveSelectedCommand}"
+                                Margin="0,0,4,0" AutomationProperties.Name="Remove selected item" />
+                        <Button Grid.Column="1" Content="Up" Command="{Binding MoveUpCommand}"
+                                Margin="2,0" AutomationProperties.Name="Move selected item up" />
+                        <Button Grid.Column="2" Content="Down" Command="{Binding MoveDownCommand}"
+                                Margin="4,0,0,0" AutomationProperties.Name="Move selected item down" />
+                    </Grid>
+
+                    <Grid ColumnDefinitions="Auto,*">
+                        <CheckBox Grid.Column="0" Content="Loop" IsChecked="{Binding LoopPlaylist}"
+                                  VerticalAlignment="Center" AutomationProperties.Name="Loop playlist" />
+                        <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right"
+                                    Spacing="6" VerticalAlignment="Center">
+                            <TextBlock Text="Seconds / image" Classes="label" VerticalAlignment="Center" Margin="0" />
+                            <TextBox Text="{Binding SecondsPerImage}" Width="64"
+                                     AutomationProperties.Name="Seconds per image" />
+                        </StackPanel>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="*,*" Margin="0,4,0,0">
+                        <Button Grid.Column="0" Classes="accent" Content="Start streaming"
+                                Command="{Binding StartCommand}" Margin="0,0,4,0"
+                                AutomationProperties.Name="Start streaming" />
+                        <Button Grid.Column="1" Classes="rec" Content="Stop"
+                                Command="{Binding StopCommand}" Margin="4,0,0,0"
+                                AutomationProperties.Name="Stop streaming" />
+                    </Grid>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>
